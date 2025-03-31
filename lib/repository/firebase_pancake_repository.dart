@@ -24,7 +24,7 @@ class FirebasePancakeRepository extends PancakeRepository {
 
     // Handle errors
     if (response.statusCode != HttpStatus.ok) {
-      throw Exception('Failed to add user');
+      throw Exception('Failed to add pancake');
     }
 
     // Firebase returns the new ID in 'name'
@@ -63,6 +63,27 @@ class FirebasePancakeRepository extends PancakeRepository {
       throw Exception('Failed to delete');
     }
     
+  }
+  
+  @override
+  Future<void> updatePancake({required String id, required String newColor, required double newPrice}) async{
+    Uri uri = Uri.parse('$baseUrl/$pancakesCollection/$id.json');
+
+    final updatedPancakeData = {
+      'color': newColor,
+      'price': newPrice,
+    };
+
+    final http.Response response = await http.patch(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(updatedPancakeData),
+    );
+
+    // Handle errors
+    if (response.statusCode != HttpStatus.ok) {
+      throw Exception('Failed to update pancake');
+    }
 
   }
 

@@ -23,4 +23,10 @@ class MockPancakeRepository extends PancakeRepository {
     // TODO: implement deletePancake
     throw UnimplementedError();
   }
+  
+  @override
+  Future<void> updatePancake({required String id, required String newColor, required double newPrice}) {
+    // TODO: implement updatePancake
+    throw UnimplementedError();
+  }
 }

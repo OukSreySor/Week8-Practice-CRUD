@@ -46,10 +46,17 @@ class Pancakeprovider extends ChangeNotifier {
   }
 
   void deletePancake(String id) async {
-
     await _repository.deletePancake(id: id);
-    
-    pancakesState!.data!.removeWhere((pancake) => pancake.id == id);
+  	
+    fetchUsers();
+
+    notifyListeners();
+  }
+
+  void updatePancake(String id, String color, double price) async {
+    await _repository.updatePancake(id: id, newColor: color, newPrice: price);
+
+    fetchUsers();
 
     notifyListeners();
   }
